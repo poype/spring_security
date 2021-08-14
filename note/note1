@@ -1,0 +1,14 @@
+SpringSecurity是利用一些列的Filter实现的，涉及到的Filter如下
+1. DelegatingFilterProxy：它是SpringMvc中的类，它的作用是在Tomcat Container和Spring Container之间建立桥梁，以便在Tomcat Filter
+                          中能够使用Spring Bean资源。
+                          其实它就是一个proxy，在它内部会获取到Spring Bean，进而调用Spring Bean。但它要求调用的Spring Bean也必须
+                          实现Filter接口。
+2. FilterChainProxy：它也实现了Filter接口，它会挂载到DelegatingFilterProxy上，它是SpringSecurity的总入口。
+3. SecurityFilterChain：对一次request的安全检查会用到 N 个Filter，这些所有的Filter构成的一个整体就是SecurityFilterChain。
+                        FilterChainProxy通过SecurityFilterChain获取一系列的Filter，再循环依次调用每个Filter的doFilter方法
+                        执行安全检查。
+                        FilterChainProxy中可以包含多个SecurityFilterChain，通过SecurityFilterChain的matches方法判断选择
+                        哪个SecurityFilterChain处理这次request。默认使用的实现类是 DefaultSecurityFilterChain。
+4. SecurityFilter：真正对一次request进行安全检查的地方，一个SecurityFilterChain包含任意数量的SecurityFilter。
+                   SpringBoot默认配置的SecurityFilter如截图所示
+
