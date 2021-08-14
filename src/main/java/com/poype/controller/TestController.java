@@ -12,6 +12,11 @@ public class TestController {
     public String hello() {
         return "hello security";
     }
+
+    @GetMapping("login")
+    public String login() {
+        return "login page";
+    }
 }
 
 /**
