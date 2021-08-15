@@ -17,6 +17,16 @@ public class TestController {
     public String login() {
         return "login page";
     }
+
+    @GetMapping("index")
+    public String index() {
+        return "default login success";
+    }
+
+    @GetMapping("private")
+    public String inner() {
+        return "inner private";
+    }
 }
 
 /**
