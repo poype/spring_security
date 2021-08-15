@@ -42,9 +42,11 @@ class TestUserDetails implements UserDetails {
         // 模拟两个权限
         GrantedAuthority authority1 = new TestAuthority("one");
         GrantedAuthority authority2 = new TestAuthority("two");
+        GrantedAuthority authority3 = new TestAuthority("admin");
 
         grantedAuthorityList.add(authority1);
         grantedAuthorityList.add(authority2);
+        grantedAuthorityList.add(authority3);
 
         return grantedAuthorityList;
     }
@@ -91,11 +93,14 @@ class TestAuthority implements GrantedAuthority {
     }
 
     @Override
-    public String getAuthority() {
-        return null;
+    public String toString() {
+        return "TestAuthority{" +
+                "authority='" + authority + '\'' +
+                '}';
     }
 
-    public void setAuthority(String authority) {
-        this.authority = authority;
+    @Override
+    public String getAuthority() {
+        return authority;
     }
 }

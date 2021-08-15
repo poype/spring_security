@@ -27,6 +27,7 @@ public class UserDetailSecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/test/index")  // 登录成功之后，默认跳转路径
                 .and().authorizeRequests()
                 .antMatchers("/user/login", "/login.html").permitAll()
+                .antMatchers("/test/hello").hasAuthority("admin")
                 .anyRequest().authenticated().and().csrf().disable(); // 这里必须要将csrf disable掉，否则无法调用登录接口
     }
 
